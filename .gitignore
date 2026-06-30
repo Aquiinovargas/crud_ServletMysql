@@ -1,0 +1,12 @@
+# Carpetas generadas por Ant
+build/
+dist/
+
+# Configuración privada de NetBeans
+nbproject/private/
+
+# Archivos compilados
+*.class
+
+# Logs
+*.log
