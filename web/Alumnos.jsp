@@ -33,6 +33,10 @@
 
 <div id="form_registro">
 
+    <div style="text-align:right;max-width:1100px;margin:0 auto 10px auto;">
+        <a href="UsuarioServlet?accion=Logout">Cerrar sesión</a>
+    </div>
+
     <h2><%= (edit != null) ? "Modificar calificaciones" : "Registro de calificaciones" %></h2>
 
     <form method="post" action="AlumnoServlet">

@@ -8,4 +8,7 @@
         <servlet-name>AlumnoServlet</servlet-name>
         <url-pattern>/AlumnoServlet</url-pattern>
     </servlet-mapping>
+    <welcome-file-list>
+        <welcome-file>Login.jsp</welcome-file>
+    </welcome-file-list>
 </web-app>
