@@ -41,6 +41,10 @@ public class UsuarioServlet extends HttpServlet {
 
                     request.setAttribute("error", "Ese correo ya esta registrado");
 
+                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/Registro.jsp");
+                    rd.forward(request, response);
+                    return;
+
                 } else {
 
                     Usuario usuario = new Usuario();
@@ -51,9 +55,19 @@ public class UsuarioServlet extends HttpServlet {
                     usuario.setPassword(request.getParameter("tfPassword"));
 
                     boolean ok = dao.registrar(usuario);
+
                     if (!ok) {
+
                         request.setAttribute("error", dao.getUltimoError());
+
+                        RequestDispatcher rd = getServletContext().getRequestDispatcher("/Registro.jsp");
+                        rd.forward(request, response);
+                        return;
+
                     }
+
+                    response.sendRedirect("Login.jsp?registrado=1");
+                    return;
 
                 }
 

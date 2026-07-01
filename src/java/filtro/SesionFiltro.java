@@ -13,10 +13,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 /**
- * Bloquea el acceso a AlumnoServlet si no hay sesion iniciada.
- * Manda a Login.jsp en caso de que no exista "usuario" en sesion.
+ * Bloquea el acceso a AlumnoServlet y a las acciones de administracion de
+ * UsuarioServlet (listar, editar, modificar, cambiar estado) si no hay
+ * sesion iniciada. Las acciones "Login" y "Registrar" siempre se permiten,
+ * porque son las que usa alguien que TODAVIA no tiene sesion.
  */
-@WebFilter(filterName = "SesionFiltro", urlPatterns = {"/AlumnoServlet"})
+@WebFilter(filterName = "SesionFiltro", urlPatterns = {"/AlumnoServlet", "/UsuarioServlet"})
 public class SesionFiltro implements Filter {
 
     @Override
@@ -30,9 +32,14 @@ public class SesionFiltro implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
 
-        HttpSession session = req.getSession(false);
+        String accion = req.getParameter("accion");
 
-        if (session != null && session.getAttribute("usuario") != null) {
+        boolean esAccionPublica = "Login".equals(accion) || "Registrar".equals(accion);
+
+        HttpSession session = req.getSession(false);
+        boolean logueado = session != null && session.getAttribute("usuario") != null;
+
+        if (logueado || esAccionPublica) {
 
             chain.doFilter(request, response);
 

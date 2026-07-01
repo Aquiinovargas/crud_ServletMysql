@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Login - BD CON SERVLETS</title>
+    <title>Registro - BD CON SERVLETS</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="estilos.css">
@@ -15,7 +15,7 @@
 
 <div id="form_registro">
 
-    <h2>Iniciar sesión</h2>
+    <h2>Crear cuenta</h2>
 
     <%
         String error = (String) request.getAttribute("error");
@@ -26,30 +26,28 @@
     </div>
     <%
         }
-
-        if ("1".equals(request.getParameter("registrado"))) {
-    %>
-    <div style="max-width:1100px;margin:0 auto 18px auto;background:#e6f4ea;border:1px solid #b7e1c0;color:#1e7a34;padding:14px 18px;border-radius:8px;font-size:13.5px;">
-        Cuenta creada correctamente. Ya puedes iniciar sesión.
-    </div>
-    <%
-        }
     %>
 
     <form method="post" action="UsuarioServlet">
 
-        <input type="hidden" name="accion" value="Login">
+        <input type="hidden" name="accion" value="Registrar">
 
-        <input type="email" name="tfCorreo" placeholder="Correo" required>
+        <input type="text" name="tfNombre" placeholder="Nombre" required>
+
+        <input type="text" name="tfPaterno" placeholder="Apellido Paterno" required>
+
+        <input type="text" name="tfMaterno" placeholder="Apellido Materno" required>
+
+        <input type="email" name="tfCorreo" placeholder="Correo (usuario)" required>
 
         <input type="password" name="tfPassword" placeholder="Contraseña" required>
 
-        <input type="submit" value="Entrar">
+        <input type="submit" value="Registrarme">
 
     </form>
 
     <p style="text-align:center;margin-top:12px;">
-        ¿No tienes cuenta? <a href="Registro.jsp">Regístrate aquí</a>
+        ¿Ya tienes cuenta? <a href="Login.jsp">Inicia sesión aquí</a>
     </p>
 
 </div>

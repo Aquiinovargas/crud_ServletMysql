@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import modelos.Usuario;
 import modelos.Usuarios;
+import util.Seguridad;
 
 public class DaoUsuario {
 
@@ -87,7 +88,7 @@ public class DaoUsuario {
             ps.setString(2, u.getApPaterno());
             ps.setString(3, u.getApMaterno());
             ps.setString(4, u.getCorreo());
-            ps.setString(5, u.getPassword());
+            ps.setString(5, Seguridad.hashPassword(u.getPassword()));
 
             ps.executeUpdate();
 
@@ -205,7 +206,7 @@ public class DaoUsuario {
              PreparedStatement ps = con.prepareStatement(sql)) {
 
             ps.setString(1, correo);
-            ps.setString(2, password);
+            ps.setString(2, Seguridad.hashPassword(password));
 
             try (ResultSet rs = ps.executeQuery()) {
 
